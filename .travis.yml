@@ -1,0 +1,23 @@
+sudo: required
+services:
+    - docker
+    
+before_install:
+    - docker build -t anandpoddar/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+    - docker run anandpoddar/react-test npm test -- --coverage
+
+after_success:
+    - docker build -t anandpoddar/multi-client ./client
+    - docker build -t anandpoddar/multi-nginx ./nginx
+    - docker build -t anandpoddar/multi-server ./server
+    - docker build -t anandpoddar/multi-worker ./worker
+    # ligin to docker cli
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+    #take images and push them to the docker hub
+    - docker push anandpoddar/multi-client
+    - docker push anandpoddar/multi-nginx
+    - docker push anandpoddar/multi-server
+    - docker push anandpoddar/multi-worker
+    
