@@ -12,7 +12,7 @@
 			"name": "server",
 			"image": "anandpoddar/multi-server",
 			"hostname": "api",
-			"essential": flase,
+			"essential": false,
 			"memory": 128
 		},
 		{
