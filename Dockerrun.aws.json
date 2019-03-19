@@ -23,7 +23,7 @@
 			"memory": 128
 		},
 		{
-			"name": "nginx"
+			"name": "nginx",
 			"image": "anandpoddar/multi-nginx",
 			"hostname": "nginx",
 			"essential": true,
